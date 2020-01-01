@@ -1,0 +1,15 @@
+{
+  "name": "todolist",
+  "version": "0.0.1",
+  "description": "Simple ToDO List App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Seif Hatem",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.8.3"
+  }
+}
