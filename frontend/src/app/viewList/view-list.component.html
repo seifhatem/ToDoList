@@ -6,7 +6,7 @@
       </div>
 <div>
   <ul *ngFor="let entry of list">
-  <li [ngClass]="entry.status==true ? 'checked' : 'notchecked'">{{entry.title}}</li>
+  <li (click)="switchStatus(entry._id)" [ngClass]="entry.status==true ? 'checked' : 'notchecked'">{{entry.title}}</li>
   </ul>
 </div>
 

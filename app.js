@@ -39,7 +39,7 @@ app.post('/add', function(req, res) {
     // check if title is set correctly
     if ( typeof title === 'undefined' || title.length<1){
       res.status(400);
-      res.send('Title Required');
+      res.send(JSON.stringify({error: "Title Required"}));
       res.end
     }
     else {
@@ -55,5 +55,25 @@ app.post('/add', function(req, res) {
       });
     }
 
+});
 
+app.post('/switch', function(req, res) {
+    var id = req.body.id
+
+    // check if id is set correctly
+    if ( typeof id === 'undefined' || id.length<1){
+      res.status(400);
+      res.send(JSON.stringify({error: "id Required"}));
+      res.end
+    }
+    else {
+
+      EntrySchema.findOne({ _id: id }, function(err, entry) {
+    entry.status = !entry.status;
+    entry.save(function(err, updatedEntry) {
+        res.send(JSON.stringify({data: "Entry updated successfully!"}));
+    });
+});
+
+}
 });

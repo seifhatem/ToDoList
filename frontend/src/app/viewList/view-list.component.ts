@@ -21,6 +21,21 @@ constructor(private http: HttpClient) { }
 list = [];
 newTaskTitle = "";
 
+switchStatus(entryId){
+  let body = new URLSearchParams();
+  body.set('id', entryId);
+
+  let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+  };
+
+    this.http.post("http://localhost:3000/switch", body.toString(),options,{responseType: 'text'})
+            .subscribe(data => {
+                this.reloadList();
+            }, error => {
+                alert("Error updating status");
+            });
+}
 
 onAddClick(){
 if(this.newTaskTitle.length>1){
