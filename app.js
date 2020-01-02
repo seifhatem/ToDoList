@@ -15,6 +15,7 @@ process.exit(0);
 app.listen(3000);
 console.log('Listening on port 3000...');
 
+
 var db = mongoose.connection;
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,8 +26,9 @@ app.get('/ping', function(req, res) {
 
 
 app.get('/list', function(req, res) {
+console.log("Fetch Requested")
 EntrySchema.find(function(err, data) {
-  res.send(JSON.stringify(data));
+  res.send(data);
 });
 
 });
@@ -43,13 +45,13 @@ app.post('/add', function(req, res) {
     else {
       // creating a model and saving it to the db
       var newEntry = new EntrySchema({
-        title: title
+        title: title,
+        status: true
       });
 
       newEntry.save(function(err) {
         if (err) throw err;
-
-        res.send('Entry added successfully!');
+        res.send(JSON.stringify({data: "Entry added successfully!"}));
       });
     }
 
