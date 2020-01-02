@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class ViewListComponent implements OnInit{
 
 
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient,private router: Router) { }
 
 list = [];
 newTaskTitle = "";
@@ -29,7 +30,7 @@ switchStatus(entryId){
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
   };
 
-    this.http.post("http://localhost:3000/switch", body.toString(),options,{responseType: 'text'})
+    this.http.post("http://localhost:3000/switch", body.toString(),options)
             .subscribe(data => {
                 this.reloadList();
             }, error => {
@@ -39,7 +40,6 @@ switchStatus(entryId){
 
 onAddClick(){
 if(this.newTaskTitle.length>1){
-  alert("adding "+ this.newTaskTitle + "to the list");
 
 
 let body = new URLSearchParams();
@@ -49,7 +49,7 @@ let options = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
 };
 
-  this.http.post("http://localhost:3000/add", body.toString(),options,{responseType: 'text'})
+  this.http.post("http://localhost:3000/add", body.toString(),options)
           .subscribe(data => {
               this.reloadList();
           }, error => {
@@ -57,12 +57,15 @@ let options = {
           });
 
 }
+this.newTaskTitle ="";
 }
 
 reloadList(){
-  this.http.get("http://localhost:3000/list").subscribe((res)=>{
+  this.http.get<any>("http://localhost:3000/list").subscribe((res)=>{
               this.list = res;
-          });
+            }, error => {
+                this.router.navigateByUrl("/login");
+            });
     }
     ngOnInit() {
     this.reloadList()
