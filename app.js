@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
+var md5 = require('md5');
 
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
@@ -63,12 +64,18 @@ app.post('/signup', function(req, res) {
       // creating a model and saving it to the db
       var newUser = new UserSchema({
         username: username,
-        password: password
+        password: md5(password)
       });
 
       newUser.save(function(err) {
-        if (err) throw err;
+        if (err) {
+          res.status(500);
+          res.send(JSON.stringify({error: "Signup Failed"}));
+          res.end
+        }
+        else{
         res.send(JSON.stringify({data: "User created successfully!"}));
+      }
       });
     }
 
@@ -77,7 +84,7 @@ app.post('/signup', function(req, res) {
 app.post('/login', function(req, res) {
   req.session.regenerate(function(){
   });
-  
+
     var username = req.body.username
     var password = req.body.password
 
@@ -93,12 +100,8 @@ app.post('/login', function(req, res) {
       res.end
     }
     else {
-      // creating a model and saving it to the db
-      var newUser = new UserSchema({
-        username: username,
-        password: password
-      });
 
+      password = md5(password);
 
     UserSchema.findOne({ username: username, password: password }, function(err, user) {
           if (!user){
