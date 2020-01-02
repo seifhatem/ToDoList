@@ -1,9 +1,13 @@
 {
   "name": "frontend",
   "version": "0.0.0",
+  "engines": {
+    "node": "10.9",
+    "npm": "~6.4.1"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -20,6 +24,8 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@ng-bootstrap/ng-bootstrap": "^5.1.4",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
