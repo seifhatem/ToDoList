@@ -43,22 +43,22 @@ app.post('/signup', function(req, res) {
     if ( typeof username === 'undefined' || username.length<1){
       res.status(400);
       res.send(JSON.stringify({error: "Username Required"}));
-      res.end
+
     }
     else if (typeof password === 'undefined' || password.length<1) {
       res.status(400);
       res.send(JSON.stringify({error: "Password Required"}));
-      res.end
+
     }
     else if (typeof password2 === 'undefined' || password2.length<1) {
       res.status(400);
       res.send(JSON.stringify({error: "Password Confirmation Required"}));
-      res.end
+
     }
     else if(password!==password2) {
       res.status(400);
       res.send(JSON.stringify({error: "Passwords do not match"}));
-      res.end
+
     }
     else {
       // creating a model and saving it to the db
@@ -71,7 +71,7 @@ app.post('/signup', function(req, res) {
         if (err) {
           res.status(500);
           res.send(JSON.stringify({error: "Signup Failed"}));
-          res.end
+
         }
         else{
         res.send(JSON.stringify({data: "User created successfully!"}));
@@ -92,12 +92,12 @@ app.post('/login', function(req, res) {
     if ( typeof username === 'undefined' || username.length<1){
       res.status(400);
       res.send(JSON.stringify({error: "Username Required"}));
-      res.end
+
     }
     else if (typeof password === 'undefined' || password.length<1) {
       res.status(400);
       res.send(JSON.stringify({error: "Password Required"}));
-      res.end
+
     }
     else {
 
@@ -107,12 +107,12 @@ app.post('/login', function(req, res) {
           if (!user){
             res.status(403);
             res.send(JSON.stringify({error: "Authentication Failed"}));
-            res.end;
+            ;
           }
           else if (password != user.password){
               res.status(403);
               res.send(JSON.stringify({error: "Authentication Failed"}));
-              res.end;
+              ;
             }
             else{
 
@@ -121,7 +121,7 @@ app.post('/login', function(req, res) {
 
 
                 res.send(JSON.stringify({data: "success"}));
-                res.end;
+                ;
             }
 
         });
@@ -137,7 +137,7 @@ app.get('/list', function(req, res) {
   if (typeof req.session.user === 'undefined') {
     res.status(401);
     res.send(JSON.stringify({error: "Authentication Failed"}));
-    res.end;
+    ;
   }
 else {
 
@@ -153,7 +153,7 @@ app.post('/add', function(req, res) {
   if (typeof req.session.user === 'undefined') {
     res.status(401);
     res.send(JSON.stringify({error: "Authentication Failed"}));
-    res.end;
+    ;
   }
 else{
     var title = req.body.title
@@ -162,7 +162,7 @@ else{
     if ( typeof title === 'undefined' || title.length<1){
       res.status(400);
       res.send(JSON.stringify({error: "Title Required"}));
-      res.end
+
     }
     else {
       // creating a model and saving it to the db
@@ -183,7 +183,7 @@ app.post('/switch', function(req, res) {
   if (typeof req.session.user === 'undefined') {
     res.status(401);
     res.send(JSON.stringify({error: "Authentication Failed"}));
-    res.end;
+    ;
   }
   else{
 
@@ -193,7 +193,7 @@ app.post('/switch', function(req, res) {
     if ( typeof id === 'undefined' || id.length<1){
       res.status(400);
       res.send(JSON.stringify({error: "id Required"}));
-      res.end
+
     }
     else {
 
