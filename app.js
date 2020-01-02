@@ -17,7 +17,7 @@ app.use(session({
   cookie: {maxAge: 24*60*60*1000}
 }))
 
-mongoose.connect('mongodb://localhost/ToDoListDB',{ useNewUrlParser: true , useUnifiedTopology: true }).then(() => console.log('Connected to DB'))
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/ToDoListDB',{ useNewUrlParser: true , useUnifiedTopology: true }).then(() => console.log('Connected to DB'))
 .catch(err => {
 console.log('Error connecting to DB, exiting now.');
 process.exit(0);
