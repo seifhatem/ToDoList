@@ -9,6 +9,7 @@
   "author": "Seif Hatem",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.7.9",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mongoose": "^5.8.3"
