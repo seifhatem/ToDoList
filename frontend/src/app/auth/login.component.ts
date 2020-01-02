@@ -30,7 +30,7 @@ export class LoginComponent{
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
 
-      this.http.post("http://localhost:3000/login", body.toString(),options)
+      this.http.post("https://dry-eyrie-27465.herokuapp.com/login", body.toString(),options)
               .subscribe(data => {
                   this.router.navigateByUrl("/");
               }, error => {

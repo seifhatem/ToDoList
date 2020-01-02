@@ -30,7 +30,7 @@ switchStatus(entryId){
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
   };
 
-    this.http.post("http://localhost:3000/switch", body.toString(),options)
+    this.http.post("https://dry-eyrie-27465.herokuapp.com/switch", body.toString(),options)
             .subscribe(data => {
                 this.reloadList();
             }, error => {
@@ -49,7 +49,7 @@ let options = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
 };
 
-  this.http.post("http://localhost:3000/add", body.toString(),options)
+  this.http.post("https://dry-eyrie-27465.herokuapp.com/add", body.toString(),options)
           .subscribe(data => {
               this.reloadList();
           }, error => {
@@ -61,7 +61,7 @@ this.newTaskTitle ="";
 }
 
 reloadList(){
-  this.http.get<any>("http://localhost:3000/list").subscribe((res)=>{
+  this.http.get<any>("https://dry-eyrie-27465.herokuapp.com/list").subscribe((res)=>{
               this.list = res;
             }, error => {
                 this.router.navigateByUrl("/login");
