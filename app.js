@@ -23,6 +23,14 @@ app.get('/ping', function(req, res) {
     res.send({ping:'Server UP!'});
 });
 
+
+app.get('/list', function(req, res) {
+EntrySchema.find(function(err, data) {
+  res.send(JSON.stringify(data));
+});
+
+});
+
 app.post('/add', function(req, res) {
     var title = req.body.title
 
