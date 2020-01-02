@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/ToDoListDB',{ u
 console.log('Error connecting to DB, exiting now.');
 process.exit(0);
 });
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 console.log('Listening on port 3000...');
 
 
