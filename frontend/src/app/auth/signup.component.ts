@@ -17,7 +17,7 @@ import { Router } from "@angular/router";
 export class SignupComponent{
 
     constructor(private http: HttpClient,private router: Router) { }
-    
+
   username = "";
   password = "";
   password2 ="";
@@ -31,7 +31,7 @@ signup(){
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
   };
 
-    this.http.post("http://localhost:3000/signup", body.toString(),options)
+    this.http.post("https://dry-eyrie-27465.herokuapp.com/signup", body.toString(),options)
             .subscribe(data => {
                 this.router.navigateByUrl("/login");
             }, error => {
